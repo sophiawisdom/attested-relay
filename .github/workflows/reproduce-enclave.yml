@@ -1,0 +1,89 @@
+name: Reproduce measured enclave
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/reproduce-enclave.yml', 'build/ci/**']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Independent ARM build ${{ matrix.copy }}
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        copy: [1, 2]
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          clean: false
+      - name: Install AWS-published Nitro tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libarchive-tools
+          bash build/ci/install-nitro.sh "$RUNNER_TEMP/nitro"
+      - name: Build pinned public source without imported caches
+        env:
+          COPY: ${{ matrix.copy }}
+        run: |
+          source "$RUNNER_TEMP/nitro/environment.sh"
+          bash build/ci/build.sh "$RUNNER_TEMP/build" "$COPY"
+          cp "$RUNNER_TEMP/nitro/tooling-evidence.json" "$RUNNER_TEMP/build/evidence/tooling-evidence.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: build-${{ matrix.copy }}
+          path: ${{ runner.temp }}/build/evidence/
+          if-no-files-found: error
+          retention-days: 90
+
+  compare-and-attest:
+    needs: build
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+      attestations: write
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+          clean: false
+      - name: Install AWS-published Nitro tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libarchive-tools
+          bash build/ci/install-nitro.sh "$RUNNER_TEMP/nitro"
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: build-*
+          path: ${{ runner.temp }}/inputs
+      - name: Independently measure both EIFs and compare with production
+        run: |
+          source "$RUNNER_TEMP/nitro/environment.sh"
+          python3 build/ci/evidence.py compare "$RUNNER_TEMP/inputs" "$RUNNER_TEMP/verified"
+          cp "$RUNNER_TEMP/nitro/tooling-evidence.json" "$RUNNER_TEMP/verified/tooling-evidence.json"
+      - name: Attest measured EIFs and comparison report
+        id: attest
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
+        with:
+          subject-path: |
+            ${{ runner.temp }}/verified/reproduction.json
+            ${{ runner.temp }}/inputs/build-1/attested-relay.eif
+            ${{ runner.temp }}/inputs/build-2/attested-relay.eif
+      - name: Preserve portable Sigstore bundle
+        env:
+          BUNDLE: ${{ steps.attest.outputs.bundle-path }}
+        run: cp "$BUNDLE" "$RUNNER_TEMP/verified/attestation-bundle.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: verified-reproduction
+          path: ${{ runner.temp }}/verified/
+          if-no-files-found: error
+          retention-days: 90
