@@ -29,9 +29,6 @@ hardware presented to the enclave, and the authenticated EC2 API's account of
 the instance. A malicious AWS provider capable of falsifying those mechanisms
 is outside the implemented protection.
 
-AWS trust is an explicit requirement, confirmed by the project owner. Earlier
-exploration of a malicious-AWS scenario is not part of this threat model.
-
 Other assumptions:
 
 - The client's execution environment and verification code are trustworthy,
