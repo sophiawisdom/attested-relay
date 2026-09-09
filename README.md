@@ -19,8 +19,27 @@ Application source commit: `a10323dede4413fbf295916b8ad12e3dbad7514e`.
 The CI repository has its own separate commit identity. The threat model's
 relative measurement/review links refer to files in the application archive.
 
-Status: workflow prepared and locally checked; see actual Actions results for
-whether a public reproduction has completed. Do not treat this README as a
-successful-build claim. A verifier must pin a reviewed CI revision, verify its
-Sigstore bundle, then verify a fresh AWS Nitro attestation bound to the actual
-TLS connection and matching enclave measurement.
+Status: **independent reproduction passed** on 2026-09-09. Both GitHub-hosted
+ARM builds reproduced production's Docker image and PCR0/1/2. A separate job
+remeasured both EIFs and signed the report and actual artifacts. Local verification
+accepted the authentic evidence and rejected an altered report and wrong workflow
+revision.
+
+- [Successful build and signing run](https://github.com/sophiawisdom/attested-relay/actions/runs/34410069287)
+- [Public evidence downloads](https://github.com/sophiawisdom/attested-relay/releases/tag/ci-a10323d-34410069287)
+- [Recorded measurements and verification](measurements/github-actions-a10323d-20260909/)
+- **CI revision to review and pin:** `5d47234e2c7b0f0c77051c6fffe6bed363e69658`
+
+Download `reproduction.json` and `attestation-bundle.json` into a directory, then:
+
+```sh
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 5d47234e2c7b0f0c77051c6fffe6bed363e69658
+```
+
+The pin identifies the workflow revision that performed the build, even after
+later documentation changes on main. It must be independently reviewed and
+accepted. Verification needs GitHub CLI and Python, but no local application
+build. Next verify a fresh AWS Nitro attestation and actual inner TLS peer using
+the resulting PCR0. Build provenance does not establish current relay readiness
+or prove that the source is harmless. Full EIF bytes differ in unmeasured metadata;
+their measured contents match. Both jobs ran at one provider, GitHub.

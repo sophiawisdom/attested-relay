@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "github_cli": "2.86.0",
+  "ci_commit": "5d47234e2c7b0f0c77051c6fffe6bed363e69658",
+  "repository": "sophiawisdom/attested-relay",
+  "run_id": 34410069287,
+  "report_sha256": "be9545625148606f18eafc6f257d0cfd4d8ce01ace378e241e4d1eda1997d34d",
+  "bundle_sha256": "e36c551984e35d4f94b34a03d64035a829219dba70b1c5ae7451008d82b0a396",
+  "policy": {
+    "signer_workflow": "sophiawisdom/attested-relay/.github/workflows/reproduce-enclave.yml",
+    "signer_digest": "5d47234e2c7b0f0c77051c6fffe6bed363e69658",
+    "source_digest": "5d47234e2c7b0f0c77051c6fffe6bed363e69658",
+    "deny_self_hosted_runners": true
+  },
+  "report_verification_exit": 0,
+  "first_eif_verification_exit": 0,
+  "tampered_report_verification_exit": 1,
+  "wrong_signer_revision_verification_exit": 1,
+  "verified_transparency_log": "https://rekor.sigstore.dev",
+  "verified_log_timestamp": "2026-09-09T22:05:39Z",
+  "scope": "Observed local CLI checks, not an additional independent attestation. The portable Sigstore bundle is the independently verifiable evidence."
+}

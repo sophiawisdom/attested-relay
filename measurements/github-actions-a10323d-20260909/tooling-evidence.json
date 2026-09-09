@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "tooling_lock_sha256": "4af24c367e4d85c14ec97fb319f287a0ffd76fca1a445b70af395570893987ef",
+  "aws_source_commit": "2950b3699d81ad304df2458915688a552734833d",
+  "packages": [
+    {
+      "url": "https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/blobstore/4c1f5c964787145415692df0814646d8ba46053bd61bea866f598adf9c36140f/aws-nitro-enclaves-cli-1.5.0-0.amzn2023.aarch64.rpm",
+      "sha256": "4c1f5c964787145415692df0814646d8ba46053bd61bea866f598adf9c36140f",
+      "bytes": 6778138
+    },
+    {
+      "url": "https://al2023-repos-us-west-2-de612dc2.s3.dualstack.us-west-2.amazonaws.com/blobstore/028013b5832dfef516ae25786a99465401ec7ad5e0a316f7bad0a792d6512284/aws-nitro-enclaves-cli-devel-1.5.0-0.amzn2023.aarch64.rpm",
+      "sha256": "028013b5832dfef516ae25786a99465401ec7ad5e0a316f7bad0a792d6512284",
+      "bytes": 13682914
+    }
+  ],
+  "files": {
+    "usr/bin/nitro-cli": "f944d844b8c0c03a0542c3c0472f64be3f46b33090334916d2d8c65914a25de7",
+    "usr/share/nitro_enclaves/blobs/Image": "03808bbf031a6f27178b35657e6b4b8cdf11820c349396407995ceeec82ec9b9",
+    "usr/share/nitro_enclaves/blobs/Image.config": "424e97785438d01e1436e738df0192142d81657a7b11d008f2cb9e5637b6354b",
+    "usr/share/nitro_enclaves/blobs/cmdline": "e3a26db3f0375d58ed9756cb986a717a6286f38c6e54e82b457527467fc5ae4c",
+    "usr/share/nitro_enclaves/blobs/init": "a056a462b30ff749e536e4ec5846388a4048abf10c65d4623333d52c8f724c88",
+    "usr/share/nitro_enclaves/blobs/linuxkit": "0d5a5e98f80b138c0ead6d5d7bbb1bcf53dada73b57d7b1de384981060052e3e",
+    "usr/share/nitro_enclaves/blobs/nsm.ko": "86154e77eeeea24b7835787ea0b0bc20758293703ffca15f346bf78b5788ef7b"
+  },
+  "aws_upstream_blobs": {
+    "Image": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/Image",
+      "sha256": "03808bbf031a6f27178b35657e6b4b8cdf11820c349396407995ceeec82ec9b9",
+      "bytes": 10547712,
+      "matches_rpm": true
+    },
+    "Image.config": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/Image.config",
+      "sha256": "424e97785438d01e1436e738df0192142d81657a7b11d008f2cb9e5637b6354b",
+      "bytes": 71592,
+      "matches_rpm": true
+    },
+    "cmdline": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/cmdline",
+      "sha256": "e3a26db3f0375d58ed9756cb986a717a6286f38c6e54e82b457527467fc5ae4c",
+      "bytes": 85,
+      "matches_rpm": true
+    },
+    "init": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/init",
+      "sha256": "c478b57a645ec594df9c355824f571bb684ca559d35ab380bb0cda81a0dc590d",
+      "bytes": 738616,
+      "matches_rpm": false
+    },
+    "linuxkit": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/linuxkit",
+      "sha256": "426cb1685ccd35e89b49abd3eb6357494436663606254c37315a8399105ddf16",
+      "bytes": 43949232,
+      "matches_rpm": false
+    },
+    "nsm.ko": {
+      "url": "https://raw.githubusercontent.com/aws/aws-nitro-enclaves-cli/2950b3699d81ad304df2458915688a552734833d/blobs/aarch64/nsm.ko",
+      "sha256": "fa5475cbe0506ff3b7353b8ffa056da95eacd36626562f27326d73f384e8e49a",
+      "bytes": 23208,
+      "matches_rpm": false
+    }
+  },
+  "runtime": {
+    "executed": true,
+    "version": "Nitro CLI 1.5.0",
+    "dynamic_libraries": "\tlinux-vdso.so.1 (0x0000ffe9edefc000)\n\tlibssl.so.3 => /lib/aarch64-linux-gnu/libssl.so.3 (0x0000ffe9ecef0000)\n\tlibcrypto.so.3 => /lib/aarch64-linux-gnu/libcrypto.so.3 (0x0000ffe9eca60000)\n\tlibgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000ffe9eca20000)\n\tlibm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000ffe9ec970000)\n\tlibc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffe9ec7b0000)\n\t/lib/ld-linux-aarch64.so.1 (0x0000ffe9edec0000)\n"
+  },
+  "trust": "AWS HTTPS repositories and hash-pinned AWS binaries; not a bootstrap source rebuild"
+}

@@ -5,7 +5,7 @@ intended security properties, the deployed design, and its known gaps. It is
 not a claim that all properties have been proved or that the service is ready.
 
 Measured production source: `a10323dede4413fbf295916b8ad12e3dbad7514e`.
-See [production measurements](measurements/graviton5-production-a10323d-20260909/),
+See [production measurements](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/a10323dede4413fbf295916b8ad12e3dbad7514e/manifest.json),
 [requirement audit](reviews/current/REQUIREMENTS-AUDIT.md), and
 [Astra review](reviews/current/astra-security-review.md).
 
@@ -172,6 +172,12 @@ AEAD nor a signed puzzle proves archive completeness.
 - Production `a10323d` is running and warming. Real short-work Nitro requests,
   independent offline recovery, and reproducible PCRs passed. Full-duration
   production generation, rollover and key recovery remain unverified.
+- Two independent GitHub-hosted ARM builds reproduced the production Docker
+  image and PCR0/1/2. A separate hosted job recomputed the EIF measurements and
+  signed the results. [Evidence and verification](build/ci/README.md) require
+  accepting an exact reviewed CI revision, trusting GitHub's execution/provenance,
+  and subsequently verifying a fresh AWS Nitro/TLS binding. This adds independent
+  source-to-measurement evidence; it does not prove source safety or live readiness.
 - Measured generation projects about 25.14 hours, exceeding the 24-hour serving
   epoch and causing fail-closed gaps if that estimate holds. It is a calibration
   estimate, not an observed complete production run.

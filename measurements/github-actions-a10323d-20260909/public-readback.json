@@ -1,0 +1,61 @@
+{
+  "release_url": "https://github.com/sophiawisdom/attested-relay/releases/tag/ci-a10323d-34410069287",
+  "artifacts": [
+    {
+      "name": "SHA256SUMS",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/SHA256SUMS",
+      "sha256": "c0e4afce68ad80fdf8cb03ad60d1876cce55dfff0e06fcb4a9a06754f5e5fa44",
+      "bytes": 620,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "attestation-bundle.json",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/attestation-bundle.json",
+      "sha256": "e36c551984e35d4f94b34a03d64035a829219dba70b1c5ae7451008d82b0a396",
+      "bytes": 11573,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "attested-relay-build-1.eif",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/attested-relay-build-1.eif",
+      "sha256": "97569a61f0f6b44ff9da0efd8e58f5a080e21e481d2854cafe550a87682b8716",
+      "bytes": 21386544,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "attested-relay-build-2.eif",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/attested-relay-build-2.eif",
+      "sha256": "3a456d35e2cfd1ee140ae1e51079141e8d5896025d2774846eec1074f580d2ba",
+      "bytes": 21386544,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "reproduction.json",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/reproduction.json",
+      "sha256": "be9545625148606f18eafc6f257d0cfd4d8ce01ace378e241e4d1eda1997d34d",
+      "bytes": 5839,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "tooling-evidence.json",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/tooling-evidence.json",
+      "sha256": "6ddb268fe64a6e0e50c61420e88c27ee4d58323fcf4fc0883d82f084cb808cd6",
+      "bytes": 4157,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "verified-eif-1.json",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/verified-eif-1.json",
+      "sha256": "d17d447b1c5c31de2878257e74474d2d0256edfd04573d3ab87626ec1cfaaa33",
+      "bytes": 2624,
+      "anonymous_https_readback": true
+    },
+    {
+      "name": "verified-eif-2.json",
+      "url": "https://github.com/sophiawisdom/attested-relay/releases/download/ci-a10323d-34410069287/verified-eif-2.json",
+      "sha256": "0caf131901b3e0fd174e68d3aedd2dbb7ff013a4bee84eec5346fed0b47418c7",
+      "bytes": 2624,
+      "anonymous_https_readback": true
+    }
+  ]
+}

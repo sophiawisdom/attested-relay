@@ -7,8 +7,22 @@ then signs the EIFs and a compact comparison report using GitHub artifact
 attestations. No deployment credentials, operator-hosted runners, imported build
 caches or arbitrary workflow inputs are used.
 
-The workflow is prepared locally. A successful public run and its exact workflow
-revision must be recorded before describing this as completed independent evidence.
+[Run 34410069287](https://github.com/sophiawisdom/attested-relay/actions/runs/34410069287)
+completed successfully on 2026-09-09. Both builds matched production; the separate
+verification/signing job passed. The downloaded report and actual EIF verified
+locally; an altered report and a wrong signer revision were rejected.
+
+**CI revision to review and pin:** `5d47234e2c7b0f0c77051c6fffe6bed363e69658`.
+[Public release downloads](https://github.com/sophiawisdom/attested-relay/releases/tag/ci-a10323d-34410069287)
+include both actual EIF files, `reproduction.json`, and `attestation-bundle.json`.
+Download the latter two into one directory, then run:
+
+```sh
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 5d47234e2c7b0f0c77051c6fffe6bed363e69658
+```
+
+This CI revision remains the verification pin even if documentation on `main`
+changes later. The signed report identifies that original build revision.
 
 ## What a client can verify without compiling
 
@@ -28,8 +42,9 @@ The evidence chain is:
    peer's public key, before sending its request.
 
 Download the `verified-reproduction` artifact (report and portable Sigstore bundle)
-from the successful run. The two `build-*` artifacts also contain their actual EIFs
-and diagnostics. Preserve copies: Actions artifacts have a 90-day retention period.
+from the successful run or the public release linked above. The two `build-*`
+Actions artifacts also contain their actual EIFs and diagnostics. Actions artifacts
+have a 90-day retention period; the release copies have no Actions expiry.
 The bundle can be mirrored to any host without trusting that host's assertions.
 
 With GitHub CLI and Python installed, verification requires no application build:

@@ -1,0 +1,73 @@
+{
+  "CheckCRC": true,
+  "EifVersion": 4,
+  "ImageName": "relay-ci",
+  "ImageVersion": "9d05b3dbef4c5942efc0870cd78840d5d75aa5cb07151e22ea5b31b151c13857",
+  "IsSigned": false,
+  "Measurements": {
+    "HashAlgorithm": "Sha512_48 { .. }",
+    "PCR0": "51e61c21424fabbf27f3d8a3e8a6a14af8538752c9d55238b33b00c4bda2e01392ab27131f5769defa33d39270a2f2b7",
+    "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+    "PCR2": "01c53e1481c50de9c1d1f013f84ee97b6c874ad19c71bab36c5f128ac85d8442c79a4fd4083c677b6e28a1feff5f2180"
+  },
+  "Metadata": {
+    "BuildTime": "2026-09-09T22:04:53.162289686+00:00",
+    "BuildTool": "nitro-cli",
+    "BuildToolVersion": "1.5.0",
+    "DockerInfo": {
+      "Architecture": "arm64",
+      "Author": "",
+      "Comment": "buildkit.dockerfile.v0",
+      "Config": {
+        "AttachStderr": false,
+        "AttachStdin": false,
+        "AttachStdout": false,
+        "Domainname": "",
+        "Entrypoint": [
+          "/attested-relay-enclave"
+        ],
+        "Env": [
+          "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        ],
+        "Hostname": "",
+        "Image": "",
+        "OpenStdin": false,
+        "StdinOnce": false,
+        "Tty": false,
+        "User": "",
+        "WorkingDir": "/"
+      },
+      "Created": "1970-01-01T00:00:00Z",
+      "DockerVersion": "",
+      "GraphDriver": {
+        "Data": {
+          "LowerDir": "/var/lib/docker/overlay2/1de0e249630094e9008de1e6151a7c820792aa20d56b1b50fbb81b7ded65e7cd/diff",
+          "MergedDir": "/var/lib/docker/overlay2/fc124d7c05ca6c03b1c2ff9f47a6646a72181956dec9a0e641daaf27cf02d8c4/merged",
+          "UpperDir": "/var/lib/docker/overlay2/fc124d7c05ca6c03b1c2ff9f47a6646a72181956dec9a0e641daaf27cf02d8c4/diff",
+          "WorkDir": "/var/lib/docker/overlay2/fc124d7c05ca6c03b1c2ff9f47a6646a72181956dec9a0e641daaf27cf02d8c4/work"
+        },
+        "Name": "overlay2"
+      },
+      "Id": "sha256:9d05b3dbef4c5942efc0870cd78840d5d75aa5cb07151e22ea5b31b151c13857",
+      "Metadata": {
+        "LastTagTime": "0001-01-01T00:00:00Z"
+      },
+      "Os": "linux",
+      "Parent": "",
+      "RepoDigests": [],
+      "RepoTags": [
+        "relay-ci:a10323dede4413fbf295916b8ad12e3dbad7514e-1"
+      ],
+      "RootFS": {
+        "Layers": [
+          "sha256:db650ea0fec6f15abd3bec03be2f83b991c6d5515ef6b19c0f046403d9fba8fe",
+          "sha256:d1a7b76c99bff93bdff09cac39291b0d9f60ed31cd344f28067a974e096a3571"
+        ],
+        "Type": "layers"
+      },
+      "Size": 10071608
+    },
+    "KernelVersion": "4.14.256",
+    "OperatingSystem": "Linux"
+  }
+}
