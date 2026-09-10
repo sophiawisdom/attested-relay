@@ -1,0 +1,22 @@
+{
+  "EnclaveName": "production-mullvad-92bd475",
+  "EnclaveID": "i-0de9795ee9d3ce090-enc1a0892f694bd5b0",
+  "ProcessID": 118848,
+  "EnclaveCID": 16,
+  "NumberOfCPUs": 12,
+  "CPUIDs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "MemoryMiB": 24576
+}

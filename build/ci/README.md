@@ -1,33 +1,27 @@
 # Public reproduction evidence
 
-Current candidate: `92bd47508d7ad48442c98148f6b4e09c6169ab5e` adds required
-Mullvad egress and the native hardening fixes. Its source and expected measurements
-are pinned in `release.json`. Independent GitHub reproduction is being run;
-the successful run and revision below cover the previous `a10323d` release only.
+Production source `92bd47508d7ad48442c98148f6b4e09c6169ab5e` includes required
+Mullvad egress and native hardening. Two fresh GitHub-hosted ARM builds reproduced
+its deployed Docker image and PCR0/1/2. A separate job recomputed the EIF
+measurements and signed both EIFs and the comparison report.
 
-This workflow rebuilds frozen enclave source `a10323dede4413fbf295916b8ad12e3dbad7514e`
-on two fresh GitHub-hosted ARM Linux machines. A third job recomputes both EIFs'
-measurements, requires agreement with production PCR0/1/2 and the Docker image ID,
-then signs the EIFs and a compact comparison report using GitHub artifact
-attestations. No deployment credentials, operator-hosted runners, imported build
-caches or arbitrary workflow inputs are used.
+[Run 34430163444](https://github.com/sophiawisdom/attested-relay/actions/runs/34430163444)
+passed on 2026-09-10. The downloaded report and an actual EIF passed local Sigstore
+verification with the exact workflow/source revision and hosted-runner restriction.
 
-[Run 34410069287](https://github.com/sophiawisdom/attested-relay/actions/runs/34410069287)
-completed successfully on 2026-09-09. Both builds matched production; the separate
-verification/signing job passed. The downloaded report and actual EIF verified
-locally; an altered report and a wrong signer revision were rejected.
-
-**CI revision to review and pin:** `5d47234e2c7b0f0c77051c6fffe6bed363e69658`.
-[Public release downloads](https://github.com/sophiawisdom/attested-relay/releases/tag/ci-a10323d-34410069287)
-include both actual EIF files, `reproduction.json`, and `attestation-bundle.json`.
-Download the latter two into one directory, then run:
+**CI revision to review and pin:** `a0fad3334b501c610c20dbe27137edaa607c90b3`.
+[Public release downloads](https://github.com/sophiawisdom/attested-relay/releases/tag/ci-92bd475-34430163444)
+include both EIFs, `reproduction.json`, `attestation-bundle.json`, and frozen source.
+Download the report and bundle into one directory, then run:
 
 ```sh
-bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 5d47234e2c7b0f0c77051c6fffe6bed363e69658
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay a0fad3334b501c610c20dbe27137edaa607c90b3
 ```
 
-This CI revision remains the verification pin even if documentation on `main`
-changes later. The signed report identifies that original build revision.
+This pin remains the verification revision after later documentation changes.
+The previous `a10323d` release remains available in
+[run 34410069287](https://github.com/sophiawisdom/attested-relay/actions/runs/34410069287),
+with CI revision `5d47234e2c7b0f0c77051c6fffe6bed363e69658`.
 
 ## What a client can verify without compiling
 

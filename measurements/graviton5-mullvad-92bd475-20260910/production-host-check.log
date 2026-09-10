@@ -1,0 +1,69 @@
+[
+  {
+    "EnclaveName": "production-mullvad-92bd475",
+    "EnclaveID": "i-0de9795ee9d3ce090-enc1a0892f694bd5b0",
+    "ProcessID": 118848,
+    "EnclaveCID": 16,
+    "NumberOfCPUs": 12,
+    "CPUIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "MemoryMiB": 24576,
+    "State": "RUNNING",
+    "Flags": "NONE",
+    "Measurements": {
+      "HashAlgorithm": "Sha512_48 { .. }",
+      "PCR0": "fd164375c25cef773742877caa93d56ec4e170022dc100a16216002fdb80fea8baeb3407ad401bd6bd655d9fdec5c438",
+      "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+      "PCR2": "8b3e156171cf472abaeeb06592e639372fb7d07189da2b0662e68488cc223772b19c5f4b28f7bc7af9cca22c8d96b59e"
+    }
+  }
+]
+active
+active
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal systemd[1]: Stopping graviton5-host.service - Attested relay v2 parent services (loopback HTTP, vsock and artifact sink)...
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal systemd[1]: graviton5-host.service: Deactivated successfully.
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal systemd[1]: Stopped graviton5-host.service - Attested relay v2 parent services (loopback HTTP, vsock and artifact sink).
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal systemd[1]: Started graviton5-host.service - Attested relay v2 parent services (loopback HTTP, vsock and artifact sink).
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] records directory ready
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] listening on vsock port
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] listening on vsock port
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] listening on vsock port
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] forwarding TCP to enclave
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] HTTP ciphertext relay listening
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] listening on vsock port
+Sep 10 02:39:40 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007980] listening on vsock port
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] enclave boot started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] validating enclave configuration
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] enclave configuration accepted
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] initializing NSM attester
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] seeding enclave kernel RNG from NSM
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] enclave kernel RNG seeded from NSM
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware readiness verification started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware CPU evidence check started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware CPU evidence verified
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware parent credential retrieval started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware parent credentials received
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware NSM parent binding check started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware NSM parent binding verified
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware live AWS verification started
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware live AWS evidence verified
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] hardware readiness evidence verified
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] inner TLS listener started; requests require a published epoch
+Sep 10 02:39:42 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] relay infrastructure state changed
+Sep 10 02:39:45 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] mullvad: fixed device key registered
+Sep 10 02:39:45 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] relay infrastructure state changed
+Sep 10 02:39:45 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [tlproxy-host 1789007985] UDP association established
+Sep 10 02:39:46 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] relay infrastructure state changed
+Sep 10 02:39:46 ip-172-31-45-2.us-west-2.compute.internal graviton5-host-launch.sh[118844]: [enclave] [attested-relay] mullvad: tunnel up

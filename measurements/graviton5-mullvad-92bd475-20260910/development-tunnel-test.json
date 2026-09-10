@@ -1,0 +1,49 @@
+{
+  "dev_only": true,
+  "initial_policy": {
+    "protocol_version": 2,
+    "randomx_version": "2.0.1",
+    "randomx_commit": "aaafe71322df6602c21a5c72937ac284724ae561",
+    "randomx_algorithm": "v2",
+    "segments": 7,
+    "iterations": 2,
+    "epoch_seconds": 300,
+    "service_signing_public_key": "2d8a648fb74740ec928752fb68d4df127c595e4e73a5fdff5f08f7f1fb76ffc6",
+    "graviton5_verified": false,
+    "instance_type": "c9g.4xlarge",
+    "state": "ready",
+    "current_epoch": 780417708836556033,
+    "software_version": "0.1.0+unknown",
+    "egress": "mullvad-wireguard",
+    "mullvad_up": true
+  },
+  "exit": {
+    "ip": "138.199.43.97",
+    "country": "USA",
+    "city": "Seattle, WA",
+    "longitude": -122.335167,
+    "latitude": 47.608013,
+    "mullvad_exit_ip": true,
+    "mullvad_exit_ip_hostname": "us-sea-wg-001",
+    "mullvad_server_type": "WireGuard",
+    "blacklisted": {
+      "blacklisted": false,
+      "results": []
+    },
+    "organization": "DataPacket"
+  },
+  "blocked_status": 503,
+  "reconnected": true,
+  "bootstrap_connects": [
+    "CONNECT 1.1.1.1:443",
+    "CONNECT 1.1.1.1:443",
+    "CONNECT 45.83.223.193:443",
+    "CONNECT 45.83.223.193:443",
+    "CONNECT 45.83.223.193:443"
+  ],
+  "direct_connects_after_ready": 0,
+  "udp_relays": [
+    "UDP 138.199.43.91:51820",
+    "UDP 138.199.43.78:51820"
+  ]
+}

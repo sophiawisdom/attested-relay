@@ -1,0 +1,59 @@
+[
+    {
+        "Id": "sha256:2ab429b48ca1257c7864d43b221f4771039b62bd1cea6d549bba686bd8a654ba",
+        "RepoTags": [
+            "relay-ci:92bd47508d7ad48442c98148f6b4e09c6169ab5e-1"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "1970-01-01T00:00:00Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/",
+            "Entrypoint": [
+                "/attested-relay-enclave"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 10399288,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/8555f96f5526493d442b5a5ad2367d2cf0fe2234a38d3e979a518d3577dc4caa/diff",
+                "MergedDir": "/var/lib/docker/overlay2/8c758db13460f235d9d950396f66e0b8a2659bc30eaea7ec3e42a225d05dda66/merged",
+                "UpperDir": "/var/lib/docker/overlay2/8c758db13460f235d9d950396f66e0b8a2659bc30eaea7ec3e42a225d05dda66/diff",
+                "WorkDir": "/var/lib/docker/overlay2/8c758db13460f235d9d950396f66e0b8a2659bc30eaea7ec3e42a225d05dda66/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:db650ea0fec6f15abd3bec03be2f83b991c6d5515ef6b19c0f046403d9fba8fe",
+                "sha256:dbc960c6233258d6f5363bb56497cdde016d1e2f6e8d946c62ec49aad2606b5f"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]

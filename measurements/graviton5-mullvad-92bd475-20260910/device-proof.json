@@ -1,0 +1,8 @@
+{
+  "relay_device_count": 1,
+  "relay_device_id": "0a1054cd-3032-4bc0-9f79-d0888cf3bd9e",
+  "relay_device_name": "deluxe gerbil",
+  "total_account_devices": 3,
+  "existing_two_devices_unchanged": true,
+  "enclave_boot_rotated_same_device": true
+}

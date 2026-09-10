@@ -1,11 +1,11 @@
 # Attested relay v2 threat model
 
-Status: consolidated review baseline, 2026-09-09. This document describes the
+Status: deployment update, 2026-09-10. This document describes the
 intended security properties, the deployed design, and its known gaps. It is
 not a claim that all properties have been proved or that the service is ready.
 
-Measured production source: `a10323dede4413fbf295916b8ad12e3dbad7514e`.
-See [production measurements](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/a10323dede4413fbf295916b8ad12e3dbad7514e/manifest.json),
+Measured production source: `92bd47508d7ad48442c98148f6b4e09c6169ab5e`.
+See [Mullvad production evidence](measurements/graviton5-mullvad-92bd475-20260910/),
 [requirement audit](reviews/current/REQUIREMENTS-AUDIT.md), and
 [Astra review](reviews/current/astra-security-review.md).
 
@@ -15,7 +15,10 @@ An independently verifying client should be able to send an HTTPS GET through
 the relay without giving the EC2 account owner, parent operating system, or
 relay front end the request URL, request plaintext, response plaintext, or
 enclave secrets. The intended upstream necessarily receives its request and
-knows its response.
+knows its response. Protection cannot extend to information that the client or
+an intended plaintext recipient voluntarily gives to another party. In
+particular, a destination colluding with the operator can disclose the complete
+exchange immediately; AWS trust and RandomX strength do not prevent that.
 
 Encrypted audit records are deliberately recoverable later through public
 RandomX puzzles. Confidentiality is temporary and conditional on the assumed
@@ -37,7 +40,7 @@ Other assumptions:
 - Standard cryptographic primitives remain secure, including TLS, signatures,
   hashes, HKDF, and the AEAD schemes used here.
 - WebPKI correctly authenticates upstream HTTPS servers, DoH resolvers, and the
-  AWS API. Authenticating a server does not make its content trustworthy.
+  AWS and Mullvad APIs. Authenticating a server does not make its content trustworthy.
 - RandomX and the serial wrapping construction impose the assumed work. No
   proven VDF property, hardware-independent lower bound, or seven-day theorem
   is assumed to have been demonstrated.
@@ -60,13 +63,16 @@ bugs or that a compromised compiler cannot produce malicious code.
 
 ## 4. Adversaries and capabilities
 
-Adversaries may collude; we do not require the following actors to be independent
-for confidentiality or authentication:
+Adversaries may collude. The confidentiality objective covers information that
+they cannot already obtain as intended plaintext recipients; it cannot prevent
+recipient disclosure described in section 1. Malicious upstream inputs remain
+in scope for exploitation of the enclave and disclosure of other users' data.
 
 | Actor | Capabilities considered |
 |---|---|
 | EC2 owner/root and parent host | Control parent processes, vsock/network proxies, credential replies and storage acknowledgements; observe traffic; replace, reorder, replay, truncate or withhold bytes; launch other images; kill/restart enclaves; delete host-held artifacts. |
 | Cloudflare/relay front end and network | Control outer HTTPS termination, URL handling, caching and routing; inspect outer ciphertext and metadata; replay, alter or suppress transport operations. |
+| Mullvad VPN operator | Observe destination IPs, timing, sizes and unencrypted TLS metadata; drop, reorder or alter tunnel traffic. Upstream TLS remains authenticated inside the enclave. The account owner can revoke or replace the registered device key and deny service. |
 | DNS resolver and upstream websites | Return hostile DNS/HTTP/TLS inputs and redirects, large or slow bodies, and misleading content; attempt SSRF and parser/resource attacks. Their authentic certificates do not grant trust in their responses. |
 | Anonymous relay clients | Choose requests, establish concurrent sessions, disconnect at awkward points, and attempt denial of service or exploitation of enclave code. |
 | Archive hosts and external solvers | Corrupt, omit, replay or replace artifacts and progress claims; withhold results; publish wrong keys; coordinate and share computed work; use faster hardware. |
@@ -102,6 +108,14 @@ and redirects must remain within the public HTTPS/port-443 policy. Parent
 responses, DNS/HTTP bodies, connection counts and operation lifetimes require
 bounds before untrusted input can cause unbounded resource use.
 
+Production upstream connections and their DNS-over-HTTPS lookups require an
+in-enclave Mullvad WireGuard tunnel. Its private key comes from NSM and is never
+accepted from or exported to the parent. One measured device ID is reused; each
+boot rotates its public key, and retries never create or delete devices. A missing,
+dead or stale tunnel blocks upstream traffic, including an accidental Direct mode.
+Public bootstrap lookups, Mullvad registration and AWS hardware verification may
+connect directly. Signed policy includes tunnel readiness and the egress mode.
+
 ### Entropy, epochs and disclosure
 
 Production must successfully obtain NSM randomness and reseed the kernel before
@@ -115,6 +129,11 @@ successor is late. Admitted requests retain bounded completion leases.
 
 App-owned key buffers are zeroized on release where implemented. This is not
 proof of erasing every compiler, allocator, library, kernel or hardware copy.
+An independent native probe confirmed that register bytes retained after the VM
+destructor can reconstruct a final segment output with one BLAKE2b operation.
+No externally reachable memory-read primitive was found; obtaining the final
+segment's residual state would nevertheless allow early epoch-key unwrapping.
+See the [native review](reviews/current/astra-20260909-round2/native-entropy-and-memory.md).
 Attestation also does not establish general resistance to microarchitectural
 side channels. Concrete attacks available to an in-scope adversary must be
 investigated, not dismissed merely because the code is measured.
@@ -148,10 +167,18 @@ AEAD nor a signed puzzle proves archive completeness.
 
 ## 6. Deliberate leakage and limits
 
-- Parent/front-end observers can see IP addresses, timing, sizes and connection
-  behavior. The parent can see outbound SNI when ECH is unavailable or falls
-  back; the resolver sees DNS questions. This is not an anonymity system or a
-  guarantee that destination hostnames remain hidden.
+- Parent/front-end observers can see client/VPN-peer IP addresses, timing, sizes
+  and connection behavior. WireGuard hides client-selected destination IPs and
+  upstream TLS handshakes from the parent, but Mullvad sees destination IPs and
+  outbound SNI when ECH is unavailable or falls back. The DoH resolver sees DNS
+  questions. Colluding observers and traffic analysis remain in scope as leakage;
+  this is not an anonymity guarantee or a promise to hide all hostnames.
+- Metadata can reveal content, not merely activity. Public record ciphertext
+  exposes the exact serialized plaintext length plus the AEAD tag, allowing
+  known candidates of different lengths to be distinguished without solving.
+  Following a redirect can also expose response-derived information embedded
+  in its destination hostname through DNS/SNI. No claim of hiding all facts
+  about request or response contents is made.
 - Puzzles, manifests, attestations and encrypted artifacts are public by design.
   Decrypted audit data is intended to become public after solving.
 - Approximate delay starts at puzzle publication, not at each request. With a
@@ -166,15 +193,29 @@ AEAD nor a signed puzzle proves archive completeness.
 
 ## 7. Known gaps and deployment status
 
-- Production `a10323d` is running and warming. Real short-work Nitro requests,
-  independent offline recovery, and reproducible PCRs passed. Full-duration
-  production generation, rollover and key recovery remain unverified.
-- Two independent GitHub-hosted ARM builds reproduced the production Docker
+- Production `92bd475` includes the native hardening changes documented in
+  [RandomX patch notes](vendor/randomx/PATCHED.md): a per-call AES probe, explicit
+  native VM/JIT/temporary-state erasure, and fail-closed page-permission checks.
+  [Regression evidence](reviews/current/native-fixes-20260910.md) covers ARM
+  sanitizer checks and Linux deallocation/failure-injection tests. The previously
+  reproduced shared AES-probe race is fixed in this deployed source. These checks
+  do not prove erasure of every compiler, register or kernel copy.
+- Production `92bd475` is running non-debug on Graviton5 with an authenticated
+  signed policy reporting Mullvad up and epoch warming. An eight-iteration Nitro
+  build differing only in work count passed fresh attestation, a real Mullvad-exit
+  request and exact offline audit-record recovery. Real VPN loss/recovery and
+  absence of direct fallback were exercised separately in development mode.
+  Full-duration production generation, rollover and key recovery remain unverified.
+- Two independent GitHub-hosted ARM builds reproduced the deployed `92bd475` Docker
   image and PCR0/1/2. A separate hosted job recomputed the EIF measurements and
   signed the results. [Evidence and verification](build/ci/README.md) require
   accepting an exact reviewed CI revision, trusting GitHub's execution/provenance,
   and subsequently verifying a fresh AWS Nitro/TLS binding. This adds independent
   source-to-measurement evidence; it does not prove source safety or live readiness.
+  [Run 34430163444](https://github.com/sophiawisdom/attested-relay/actions/runs/34430163444)
+  passed; its signed report and an actual EIF verified locally against CI revision
+  `a0fad3334b501c610c20dbe27137edaa607c90b3`. Full EIF bytes differ in unmeasured
+  metadata; Docker image identity and PCR0/1/2 match.
 - Measured generation projects about 25.14 hours, exceeding the 24-hour serving
   epoch and causing fail-closed gaps if that estimate holds. It is a calibration
   estimate, not an observed complete production run.

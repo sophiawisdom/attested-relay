@@ -1,0 +1,8 @@
+{
+  "diagnostic_only": true,
+  "parent_commit": "92bd47508d7ad48442c98148f6b4e09c6169ab5e",
+  "diagnostic_commit": "4254f789f2b4b70ea77eff6e52dedcc04f2160d2",
+  "iterations": 8,
+  "seven_day_claim": false,
+  "patch_sha256": "7e3c6bc0dddaa5924efb18d65b13338ba63f7845ae209ac8304381b39dc21d19"
+}
