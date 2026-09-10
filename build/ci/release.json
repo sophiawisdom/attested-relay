@@ -1,13 +1,13 @@
 {
-  "source_commit": "a10323dede4413fbf295916b8ad12e3dbad7514e",
-  "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/a10323dede4413fbf295916b8ad12e3dbad7514e/attested-relay-a10323dede4413fbf295916b8ad12e3dbad7514e.tar.gz",
-  "source_sha256": "a860d9d26861580e5dc58f16510eded6d1430f8bdf131a961a7269d646325ce6",
+  "source_commit": "92bd47508d7ad48442c98148f6b4e09c6169ab5e",
+  "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/92bd47508d7ad48442c98148f6b4e09c6169ab5e/attested-relay-92bd47508d7ad48442c98148f6b4e09c6169ab5e.tar.gz",
+  "source_sha256": "d2292ac06f695ce534943d0185f24047a41dc3c3e447ea39a09a468b8e0e9de8",
   "buildkit_image": "moby/buildkit@sha256:28a898719c18a33f4e8000685287fa36fd0dd9560c6440227d3a732d79bb41d8",
   "dockerfile_frontend": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
-  "docker_image_id": "sha256:9d05b3dbef4c5942efc0870cd78840d5d75aa5cb07151e22ea5b31b151c13857",
+  "docker_image_id": "sha256:2ab429b48ca1257c7864d43b221f4771039b62bd1cea6d549bba686bd8a654ba",
   "pcrs": {
-    "PCR0": "51e61c21424fabbf27f3d8a3e8a6a14af8538752c9d55238b33b00c4bda2e01392ab27131f5769defa33d39270a2f2b7",
+    "PCR0": "fd164375c25cef773742877caa93d56ec4e170022dc100a16216002fdb80fea8baeb3407ad401bd6bd655d9fdec5c438",
     "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
-    "PCR2": "01c53e1481c50de9c1d1f013f84ee97b6c874ad19c71bab36c5f128ac85d8442c79a4fd4083c677b6e28a1feff5f2180"
+    "PCR2": "8b3e156171cf472abaeeb06592e639372fb7d07189da2b0662e68488cc223772b19c5f4b28f7bc7af9cca22c8d96b59e"
   }
 }

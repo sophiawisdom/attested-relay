@@ -1,5 +1,10 @@
 # Public reproduction evidence
 
+Current candidate: `92bd47508d7ad48442c98148f6b4e09c6169ab5e` adds required
+Mullvad egress and the native hardening fixes. Its source and expected measurements
+are pinned in `release.json`. Independent GitHub reproduction is being run;
+the successful run and revision below cover the previous `a10323d` release only.
+
 This workflow rebuilds frozen enclave source `a10323dede4413fbf295916b8ad12e3dbad7514e`
 on two fresh GitHub-hosted ARM Linux machines. A third job recomputes both EIFs'
 measurements, requires agreement with production PCR0/1/2 and the Docker image ID,
