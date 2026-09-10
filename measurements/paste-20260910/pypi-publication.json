@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0a3",
+  "enclave_and_native_source": "19a53a50c3b340a192ef28955789ad083eb7bc69",
+  "sdk_source": "be4c86633cefb50145de6828fe265be0db5387d2",
+  "files": [
+    {
+      "filename": "attested_relay-0.2.0a3-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/57/02/4bdf379460fa46b18959c70a8c8d6cd6c67ee03e9c669008af7f9b0a7779/attested_relay-0.2.0a3-py3-none-any.whl",
+      "sha256": "70835205d045eb7c68ef7cf710eaf1de67da1b3f858815b965b5ba5454e3102a",
+      "anonymous_download_hash_verified": true
+    },
+    {
+      "filename": "attested_relay_timelock-0.2.0a3-py3-none-macosx_15_0_arm64.whl",
+      "url": "https://files.pythonhosted.org/packages/f9/d5/9c592d1433535f20e8a6f427cb268e6f5c9c037a5ce40d26f570f7de8e00/attested_relay_timelock-0.2.0a3-py3-none-macosx_15_0_arm64.whl",
+      "sha256": "0ee99c27c94fac2d8bac7e9c61a4aef4679d23be94087421d12e53f1d3c82957",
+      "anonymous_download_hash_verified": true
+    },
+    {
+      "filename": "attested_relay_timelock-0.2.0a3-py3-none-manylinux_2_34_aarch64.whl",
+      "url": "https://files.pythonhosted.org/packages/9e/e7/18a780bcc02f06f7b010bda105afda6b11f23ec9e0307725ffe971e32ee7/attested_relay_timelock-0.2.0a3-py3-none-manylinux_2_34_aarch64.whl",
+      "sha256": "387ddd3975619602868f458fef23c32a98ca02a6d74c70f42e3ac4907b6d4f72",
+      "anonymous_download_hash_verified": true
+    },
+    {
+      "filename": "attested_relay_timelock-0.2.0a3-py3-none-manylinux_2_34_x86_64.whl",
+      "url": "https://files.pythonhosted.org/packages/8c/16/2f2b3f2b41f7ed274e3458badd8d05048cba1c44579731b928f6689f66dc/attested_relay_timelock-0.2.0a3-py3-none-manylinux_2_34_x86_64.whl",
+      "sha256": "e67e34839e8c90fbf1b123274ec3378b336b57626735198d2a55aaa8866cfa06",
+      "anonymous_download_hash_verified": true
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+active
+Installed release /opt/attested-relay/releases/diagnostic-paste-5dfd2e5; no enclave launched.
+{
+  "EnclaveName": "diagnostic-paste-5dfd2e5",
+  "EnclaveID": "i-0de9795ee9d3ce090-enc1a08ab825b578f1",
+  "ProcessID": 187252,
+  "EnclaveCID": 16,
+  "NumberOfCPUs": 14,
+  "CPUIDs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "MemoryMiB": 8192
+}
+
+Successfully terminated enclave i-0de9795ee9d3ce090-enc1a08a949353529e.
+Start allocating memory...
+Started enclave with enclave-cid: 16, memory: 8192 MiB, cpu-ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]

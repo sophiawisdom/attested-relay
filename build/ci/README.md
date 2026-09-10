@@ -1,21 +1,22 @@
 # Public reproduction evidence
 
-Production source `92bd47508d7ad48442c98148f6b4e09c6169ab5e` includes required
-Mullvad egress and native hardening. Two fresh GitHub-hosted ARM builds reproduced
+Production source `19a53a50c3b340a192ef28955789ad083eb7bc69` includes required
+Mullvad egress, native hardening, the optimized ARM JIT, 84-group generation and tagged paste storage. Two fresh GitHub-hosted ARM builds reproduced
 its deployed Docker image and PCR0/1/2. A separate job recomputed the EIF
 measurements and signed both EIFs and the comparison report.
 
-[Run 34430163444](https://github.com/sophiawisdom/attested-relay/actions/runs/34430163444)
+[Run 34462293819](https://github.com/sophiawisdom/attested-relay/actions/runs/34462293819)
 passed on 2026-09-10. The downloaded report and an actual EIF passed local Sigstore
 verification with the exact workflow/source revision and hosted-runner restriction.
 
-**CI revision to review and pin:** `a0fad3334b501c610c20dbe27137edaa607c90b3`.
-[Public release downloads](https://github.com/sophiawisdom/attested-relay/releases/tag/ci-92bd475-34430163444)
-include both EIFs, `reproduction.json`, `attestation-bundle.json`, and frozen source.
+**CI revision to review and pin:** `6a8dcd564c7a66cf554f7f86520aca528e0a06b6`.
+[Public report](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/reproduction.json) and [portable signature bundle](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/attestation-bundle.json)
+are available anonymously from S3. The actual EIFs are retained in the Actions
+artifacts for 90 days.
 Download the report and bundle into one directory, then run:
 
 ```sh
-bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay a0fad3334b501c610c20dbe27137edaa607c90b3
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 6a8dcd564c7a66cf554f7f86520aca528e0a06b6
 ```
 
 This pin remains the verification revision after later documentation changes.
@@ -41,9 +42,9 @@ The evidence chain is:
    peer's public key, before sending its request.
 
 Download the `verified-reproduction` artifact (report and portable Sigstore bundle)
-from the successful run or the public release linked above. The two `build-*`
+from the successful run or the public S3 downloads linked above. The two `build-*`
 Actions artifacts also contain their actual EIFs and diagnostics. Actions artifacts
-have a 90-day retention period; the release copies have no Actions expiry.
+have a 90-day retention period; the S3 report and bundle have no Actions expiry.
 The bundle can be mirrored to any host without trusting that host's assertions.
 
 With GitHub CLI and Python installed, verification requires no application build:

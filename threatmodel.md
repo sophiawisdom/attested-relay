@@ -4,7 +4,10 @@ Status: deployment update, 2026-09-10. This document describes the
 intended security properties, the deployed design, and its known gaps. It is
 not a claim that all properties have been proved or that the service is ready.
 
-Measured production source: `92bd47508d7ad48442c98148f6b4e09c6169ab5e`.
+Measured production source: `2737c4559d616e543be706ec576630d21eae9007`.
+It is running non-debug on 14 Graviton5 cores with Mullvad up and epoch warming.
+84 serial groups preserve the previous total recovery work, while a bounded
+worker pool improves generation utilization. See [current rollout evidence](measurements/graviton-fast-rollout-20260910/README.md).
 See [Mullvad production evidence](measurements/graviton5-mullvad-92bd475-20260910/),
 [requirement audit](reviews/current/REQUIREMENTS-AUDIT.md), and
 [Astra review](reviews/current/astra-security-review.md).
@@ -193,36 +196,50 @@ AEAD nor a signed puzzle proves archive completeness.
 
 ## 7. Known gaps and deployment status
 
-- Production `92bd475` includes the native hardening changes documented in
+- Production `2737c45` includes the native hardening changes documented in
   [RandomX patch notes](vendor/randomx/PATCHED.md): a per-call AES probe, explicit
   native VM/JIT/temporary-state erasure, and fail-closed page-permission checks.
   [Regression evidence](reviews/current/native-fixes-20260910.md) covers ARM
   sanitizer checks and Linux deallocation/failure-injection tests. The previously
   reproduced shared AES-probe race is fixed in this deployed source. These checks
   do not prove erasure of every compiler, register or kernel copy.
-- Production `92bd475` is running non-debug on Graviton5 with an authenticated
+- Production `2737c45` is running non-debug on Graviton5 with an authenticated
   signed policy reporting Mullvad up and epoch warming. An eight-iteration Nitro
   build differing only in work count passed fresh attestation, a real Mullvad-exit
   request and exact offline audit-record recovery. Real VPN loss/recovery and
   absence of direct fallback were exercised separately in development mode.
   Full-duration production generation, rollover and key recovery remain unverified.
-- Two independent GitHub-hosted ARM builds reproduced the deployed `92bd475` Docker
+- Two independent GitHub-hosted ARM builds reproduced the deployed `2737c45` Docker
   image and PCR0/1/2. A separate hosted job recomputed the EIF measurements and
   signed the results. [Evidence and verification](build/ci/README.md) require
   accepting an exact reviewed CI revision, trusting GitHub's execution/provenance,
   and subsequently verifying a fresh AWS Nitro/TLS binding. This adds independent
   source-to-measurement evidence; it does not prove source safety or live readiness.
-  [Run 34430163444](https://github.com/sophiawisdom/attested-relay/actions/runs/34430163444)
+  [Run 34458531605](https://github.com/sophiawisdom/attested-relay/actions/runs/34458531605)
   passed; its signed report and an actual EIF verified locally against CI revision
-  `a0fad3334b501c610c20dbe27137edaa607c90b3`. Full EIF bytes differ in unmeasured
+  `321b09e7bef53442d567892ab91ec4feb8cfcc3d`. Full EIF bytes differ in unmeasured
   metadata; Docker image identity and PCR0/1/2 match.
-- Measured generation projects about 25.14 hours, exceeding the 24-hour serving
-  epoch and causing fail-closed gaps if that estimate holds. It is a calibration
-  estimate, not an observed complete production run.
+- The previous seven-worker configuration projected about 25.14 hours. The current
+  design schedules 84 groups over 14 workers at nice 19, preserving total work.
+  Full-duration generation throughput remains unmeasured; if generation misses
+  the 24-hour serving epoch, requests expire closed until the successor is ready.
 - AWS and Hetzner artifact copies and the nine-worker solver fleet are operating.
-  A third provider and the public Cloudflare transport still require deployment
-  and live validation. The user has reported renewing Cloudflare login; that
-  authorization/session has not yet been revalidated after the report.
+  A third provider remains pending. Public Cloudflare transport at
+  `relay.sparrowsystems.co` now runs through a Worker custom domain and a VPC
+  binding to the existing tunnel. Public retry/cache tests and fresh Nitro/TLS
+  verification passed while warming, using the SDK source user-agent fix (not
+  yet in the published wheel). Cloudflare/Worker remains an untrusted ciphertext
+  transport. The 84-group rollout separately changed the measured image and pin.
+  [Public deployment evidence](measurements/cloudflare-sparrow-20260910/README.md).
+- On 2026-09-10 the archive's `artifacts/` prefix was made publicly readable
+  and discoverable over HTTPS. Ten existing objects plus a fresh scoped-service
+  diagnostic upload passed anonymous full-byte hash checks. The latest 84-group
+  diagnostic also passed anonymous checks for all four request artifacts. The current production
+  origin still has no published artifacts. [Live launch review](measurements/launch-review-20260910/README.md).
+- The solver fleet saves recovered keys locally. Automatic public publication of
+  recovered keys/decrypted records is not deployed; public users can independently
+  solve downloaded puzzles. Automatic discovery/failover from S3 is also not wired
+  into the fleet's current origin-based follower.
 - The S3 uploader lacks delete permissions, but Object Lock is not enabled.
   Enclave-authenticated S3 storage/retention verification is not implemented.
   The user has not selected a retention duration. Do not describe current
@@ -242,3 +259,33 @@ a green test suite, or another model's conclusion alone.
 Disagreements with these assumptions—especially trust in AWS, approximate delay,
 record provenance, and storage durability—must be raised explicitly before
 claiming that the implementation satisfies a stronger threat model.
+
+
+## Tagged pastes
+
+Tags act as shared read/write passwords.
+Anyone guessing a tag can use the same public API as other agents. Scrypt slows
+online/offline guessing; low-entropy tag names do not satisfy unconditional name
+or content secrecy. Long random tags provide the intended password security.
+Opaque tag IDs are intentionally public, exposing grouping, counts and access
+patterns. The host can omit, reorder or withhold results; no completeness claim
+is made. All paste plaintext and tag passwords travel inside attested inner TLS.
+
+Per-paste content keys are derived with a separate HKDF domain from the same
+existing epoch keys; tag holders receive only individually wrapped paste keys,
+not epoch keys or relay-traffic keys. Tag wrappers allow access after old epoch
+keys are erased. Public epoch recovery unlocks only that epoch's paste contents;
+it does not reveal tag passwords or automatically unlock later epochs. Authors
+may disclose passwords in their own content. Signatures and AEAD bind paste
+metadata, tag ID, puzzle identity and signer; public recovery authenticates the
+signer through the corresponding independently attested manifest.
+
+The 100 KiB paste limit, 256-byte tag limit, two KDF workers, ten-entry page limit,
+shared request admission and a 30-second operation deadline bound resources.
+The existing assumptions about computational delay, storage acknowledgements,
+replicas, metadata leakage and imperfect memory erasure still apply.
+[Detailed protocol and API design](docs/paste-design.md).
+
+The short-work Nitro paste test, public Cloudflare 100 KiB round trip and
+independent epoch-key recovery passed. Full-duration production behavior remains
+unverified. [Paste rollout evidence](measurements/paste-20260910/README.md).

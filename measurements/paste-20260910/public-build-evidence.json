@@ -1,0 +1,26 @@
+[
+  {
+    "name": "reproduction.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/reproduction.json",
+    "sha256": "65e67c1b4cc62535f58ae9d219ca56d590ee196d8fd8a2df760aff413df84848",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "attestation-bundle.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/attestation-bundle.json",
+    "sha256": "b562c599e0a74bcd00c99e5763649524cebd086c8879dc2473366b4416b3a2b3",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "pcrs.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/pcrs.json",
+    "sha256": "b216a4cfe1b38b1f5aeccf1c14f10784a8289c8dcca72d255170a2c6b24938a8",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "warming-evidence.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/warming-evidence.json",
+    "sha256": "267e9cfc91f8ce5e61280138a037285e8d85a7a8312c31124ce85ccfc637f886",
+    "anonymous_hash_verified": true
+  }
+]

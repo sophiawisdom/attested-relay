@@ -1,0 +1,3 @@
+Verified CI evidence for source 19a53a50c3b340a192ef28955789ad083eb7bc69
+PCR0: 316983ca57a71682e2ffd4945248651ea6b8b28d601398f9c60cf508e6084491464baac0895e884cabb4298ee2a6e878
+Use this PCR0 for an independent, fresh Nitro/TLS verification; this report is not a live attestation.

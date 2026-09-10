@@ -1,0 +1,29 @@
+{
+  "nitro_evidence_authenticated": true,
+  "policy": {
+    "protocol_version": 2,
+    "paste_protocol_version": 1,
+    "paste_max_bytes": 102400,
+    "randomx_version": "2.0.1",
+    "randomx_commit": "aaafe71322df6602c21a5c72937ac284724ae561",
+    "randomx_algorithm": "v2",
+    "segments": 84,
+    "iterations": 3647344,
+    "epoch_seconds": 86400,
+    "service_signing_public_key": "561fd47567e0401196ca90a2ea5f06ac388314ad70c5ce80c01ecf3b2f3fd395",
+    "graviton5_verified": true,
+    "instance_type": "c9g.4xlarge",
+    "state": "warming",
+    "current_epoch": null,
+    "software_version": "0.1.0+19a53a50c3b340a192ef28955789ad083eb7bc69",
+    "egress": "mullvad-wireguard",
+    "mullvad_up": true
+  },
+  "timestamp_ms": 1789034208762,
+  "pcr0": "316983ca57a71682e2ffd4945248651ea6b8b28d601398f9c60cf508e6084491464baac0895e884cabb4298ee2a6e878",
+  "tls_spki_sha256": "c47bdce5a6d87f5081c286a42eb18d6236acebae49242d2e12c80e08363c0722",
+  "observed_at": "2026-09-10T09:56:48.882168+00:00",
+  "service_ready": false,
+  "ordinary_sdk_rejects_warming": true,
+  "forward_while_warming_status": 503
+}

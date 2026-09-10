@@ -1,0 +1,42 @@
+[
+  {
+    "name": "b97bbde0b3592f56fd221fdd4f4cb1b9b14e76a7cdf7c17d920f44519a7ddce1.attestation.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/b97bbde0b3592f56fd221fdd4f4cb1b9b14e76a7cdf7c17d920f44519a7ddce1.attestation.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "419deebab999981cafa379dbdfe8a83bccee32bfa1b791c2b62a139b38358ab8.paste.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/419deebab999981cafa379dbdfe8a83bccee32bfa1b791c2b62a139b38358ab8.paste.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "a797e1ee5e585a0b22b70c7e11e9a1b9ec402a6a023ac529f954c6bcbd04e84f.puzzle.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/a797e1ee5e585a0b22b70c7e11e9a1b9ec402a6a023ac529f954c6bcbd04e84f.puzzle.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "2ec4d564ec10193b30b1e792761a1ba4a63b53d96eb309e69677be7ca3fed71b.bundle.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/2ec4d564ec10193b30b1e792761a1ba4a63b53d96eb309e69677be7ca3fed71b.bundle.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "8950ef98686e98bcc323def8c33aedbe6cf2136a80e517eecd02176e8af6f428.paste.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/8950ef98686e98bcc323def8c33aedbe6cf2136a80e517eecd02176e8af6f428.paste.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "21074914bec140caf55e6fcd27887c81755b5cd38cbc9024c5e39d5c494d2d9a.paste.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/21074914bec140caf55e6fcd27887c81755b5cd38cbc9024c5e39d5c494d2d9a.paste.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "168eda9dcf5e506c42f4b8f0a70901e6bc33abae848222f582e9d06aed6678bb.record.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/168eda9dcf5e506c42f4b8f0a70901e6bc33abae848222f582e9d06aed6678bb.record.json",
+    "anonymous_hash_verified": true
+  },
+  {
+    "name": "a355e5586f0faf2262c206058f356166a75b73e54f5c7c31f222f56a9f74c43a.paste.json",
+    "url": "https://attested-relay-archive-370686332139-us-west-2.s3.us-west-2.amazonaws.com/artifacts/a355e5586f0faf2262c206058f356166a75b73e54f5c7c31f222f56a9f74c43a.paste.json",
+    "anonymous_hash_verified": true
+  }
+]

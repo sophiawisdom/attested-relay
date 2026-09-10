@@ -1,0 +1,237 @@
+   Compiling relay-timelock v0.1.0 (/Users/sophiawisdom/agent_services/timelock-proxy/crates/timelock)
+   Compiling tlproxy-host v0.1.0 (/Users/sophiawisdom/agent_services/timelock-proxy/crates/host)
+   Compiling tlproxy-enclave v0.1.0 (/Users/sophiawisdom/agent_services/timelock-proxy/crates/enclave)
+warning: field `time_cache` is never read
+  --> crates/enclave/src/attest.rs:12:5
+   |
+ 8 | pub struct Attester {
+   |            -------- field in this struct
+...
+12 |     time_cache: std::sync::Mutex<Option<(std::time::Instant, u64)>>,
+   |     ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `trusted_time_ms` is never used
+   --> crates/enclave/src/attest.rs:104:12
+    |
+ 15 | impl Attester {
+    | ------------- method in this implementation
+...
+104 |     pub fn trusted_time_ms(&self) -> Result<u64> {
+    |            ^^^^^^^^^^^^^^^
+
+warning: method `resolvers` is never used
+  --> crates/enclave/src/dns.rs:80:12
+   |
+64 | impl Resolver {
+   | ------------- method in this implementation
+...
+80 |     pub fn resolvers(&self) -> &[IpAddr] {
+   |            ^^^^^^^^^
+
+warning: constant `MAX_CREDENTIALS` is never used
+  --> crates/enclave/src/hardware.rs:22:7
+   |
+22 | const MAX_CREDENTIALS: usize = 16 * 1024;
+   |       ^^^^^^^^^^^^^^^
+
+warning: fields `addr` and `ech` are never read
+  --> crates/enclave/src/net.rs:52:9
+   |
+50 | pub struct Upstream {
+   |            -------- fields in this struct
+51 |     pub stream: tokio_rustls::client::TlsStream<Stream>,
+52 |     pub addr: IpAddr,
+   |         ^^^^
+53 |     pub ech: EchStatus,
+   |         ^^^
+
+warning: methods `resolver` and `https_get` are never used
+   --> crates/enclave/src/net.rs:73:12
+    |
+ 56 | impl Dialer {
+    | ----------- methods in this implementation
+...
+ 73 |     pub fn resolver(&self) -> &Resolver {
+    |            ^^^^^^^^
+...
+198 |     pub async fn https_get(&self, host: &str, path: &str, purpose: Purpose) -> Result<Vec<u8>> {
+    |                  ^^^^^^^^^
+
+warning: function `ech_status_str` is never used
+   --> crates/enclave/src/net.rs:260:8
+    |
+260 | pub fn ech_status_str(s: EchStatus) -> &'static str {
+    |        ^^^^^^^^^^^^^^
+
+warning: fields `cert_der`, `cert_sha256`, and `issuer` are never read
+  --> crates/enclave/src/tls.rs:18:9
+   |
+16 | pub struct CertSnapshot {
+   |            ------------ fields in this struct
+17 |     /// Leaf certificate currently presented.
+18 |     pub cert_der: Vec<u8>,
+   |         ^^^^^^^^
+19 |     pub cert_pem: String,
+20 |     pub cert_sha256: String,
+   |         ^^^^^^^^^^^
+21 |     pub issuer: &'static str,
+   |         ^^^^^^
+   |
+   = note: `CertSnapshot` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: fields `key`, `signing_key`, `spki_sha256`, and `dns_names` are never read
+  --> crates/enclave/src/tls.rs:25:5
+   |
+24 | pub struct ServerIdentity {
+   |            -------------- fields in this struct
+25 |     key: rcgen::KeyPair,
+   |     ^^^
+26 |     signing_key: Arc<dyn rustls::sign::SigningKey>,
+   |     ^^^^^^^^^^^
+...
+30 |     pub spki_sha256: String,
+   |         ^^^^^^^^^^^
+31 |     pub dns_names: Vec<String>,
+   |         ^^^^^^^^^
+
+warning: methods `csr_der`, `set_challenge`, `clear_challenge`, and `install_chain_pem` are never used
+   --> crates/enclave/src/tls.rs:122:12
+    |
+ 67 | impl ServerIdentity {
+    | ------------------- methods in this implementation
+...
+122 |     pub fn csr_der(&self, names: &[String]) -> Result<Vec<u8>> {
+    |            ^^^^^^^
+...
+130 |     pub fn set_challenge(&self, name: &str, key_auth_digest: &[u8]) -> Result<()> {
+    |            ^^^^^^^^^^^^^
+...
+146 |     pub fn clear_challenge(&self) {
+    |            ^^^^^^^^^^^^^^^
+...
+151 |     pub fn install_chain_pem(&self, chain_pem: &str) -> Result<()> {
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: function `rustls_pemfile_certs` is never used
+   --> crates/enclave/src/tls.rs:172:4
+    |
+172 | fn rustls_pemfile_certs(pem: &str) -> Result<Vec<CertificateDer<'static>>> {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `pem_encode` is never used
+   --> crates/enclave/src/tls.rs:193:4
+    |
+193 | fn pem_encode(label: &str, der: &[u8]) -> String {
+    |    ^^^^^^^^^^
+
+warning: function `x509_leaf_spki` is never used
+   --> crates/enclave/src/tls.rs:207:4
+    |
+207 | fn x509_leaf_spki(cert: &[u8]) -> Result<(usize, Vec<u8>)> {
+    |    ^^^^^^^^^^^^^^
+
+warning: `tlproxy-enclave` (bin "attested-relay-enclave" test) generated 13 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.43s
+warning: the following packages contain code that will be rejected by a future version of Rust: proc-macro-error2 v2.0.1
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running unittests src/lib.rs (target/debug/deps/relay_timelock-d1ba85535828a942)
+
+running 7 tests
+test paste::tests::tag_access_release_tampering_and_limits ... ok
+test randomx::tests::full_mode_upstream_v2_vector ... ignored, allocates 2080 MiB full dataset; run explicitly on a provisioned machine
+test randomx::tests::upstream_v2_vector ... ok
+test tests::legacy_seven_segment_fixture_still_solves ... ok
+test tests::real_randomx_roundtrip_restart_and_tampering ... ok
+test tests::supplied_entropy_drives_native_generation_and_fails_closed ... ok
+test tests::worker_counts_preserve_the_same_signed_chain ... ok
+
+test result: ok. 6 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 24.00s
+
+     Running unittests src/main.rs (target/debug/deps/relay_timelock-537d9ddf1036e174)
+
+running 3 tests
+test tests::crash_before_initial_checkpoint_restarts_from_manifest ... ok
+test tests::incomplete_journal_tail_preserves_completed_entry ... ok
+test tests::publication_is_complete_and_never_overwrites_existing_work ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running unittests src/v2_main.rs (target/debug/deps/attested_relay_enclave-7346a0f5bd8c17e1)
+
+running 28 tests
+test attest::tests::boot_entropy_gate_never_falls_back_or_continues_after_failure ... ok
+test attest::tests::extracts_attestation_timestamp ... ok
+test attest::tests::extracts_tagged_cose_payload ... ok
+test attest::tests::nsm_entropy_short_chunks_and_failures_are_bounded_and_clear_output ... ok
+test dns::tests::dns_body_accepts_exact_wire_limit_and_rejects_oversized_single_frame ... ok
+test dns::tests::oversized_chunked_dns_response_is_rejected_without_waiting_for_eof ... ok
+test hardware::tests::exact_instance_evidence_required ... ok
+test hardware::tests::pcr4_matches_aws_published_vector ... ok
+test hardware::tests::refuses_dev_attestation_and_debug_pcrs ... ok
+test hardware::tests::rejects_non_v3_cpu ... ok
+test hardware::tests::sigv4_matches_aws_botocore_reference ... ok
+test relay::tests::required_relay_never_dials_directly_even_if_mode_is_direct ... ok
+test tests::public_attestation_capacity_cannot_starve_epoch_evidence ... ok
+test transport::tests::coalesced_ok_and_tls_bytes_preserve_the_tls_stream ... ok
+test transport::tests::host_config_is_bounded_before_eof_and_accepts_exact_limit ... ok
+test transport::tests::hostile_reply_is_rejected_at_bound_without_waiting_for_eof ... ok
+test transport::tests::parent_ok_requires_exact_acknowledgement_and_newline ... ok
+test v2_diagnostics::tests::queue_and_messages_have_fixed_bounds ... ok
+test v2_diagnostics::tests::static_wire_line_and_parent_backpressure_timeout ... ok
+test v2_epoch::tests::epoch_admission_rejects_expiry_and_backward_clock ... ok
+test v2_epoch::tests::expired_key_survives_only_until_existing_request_lease_is_released ... ok
+test v2_epoch::tests::watchdog_releases_expired_key_without_generation_or_nsm ... ok
+test v2_mullvad::tests::mismatched_device_key_or_address_is_rejected ... ok
+test v2_mullvad::tests::retries_reuse_one_device_and_one_key ... ok
+test v2_proxy::tests::record_encoding_uses_canonical_cbor_key_order ... ok
+test v2_proxy::tests::rejects_private_redirects_and_credentials ... ok
+test v2_proxy::tests::sequence_exhaustion_never_wraps_or_reuses_a_nonce ... ok
+test wg::readiness_tests::dead_or_stale_handshake_is_not_ready ... ok
+
+test result: ok. 28 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+     Running unittests src/main.rs (target/debug/deps/tlproxy_enclave-cf25d3a51918b104)
+
+running 13 tests
+test attest::tests::boot_entropy_gate_never_falls_back_or_continues_after_failure ... ok
+test attest::tests::extracts_attestation_timestamp ... ok
+test attest::tests::extracts_tagged_cose_payload ... ok
+test attest::tests::nsm_entropy_short_chunks_and_failures_are_bounded_and_clear_output ... ok
+test beacon::tests::lock_round_never_opens_before_full_duration ... ok
+test dns::tests::dns_body_accepts_exact_wire_limit_and_rejects_oversized_single_frame ... ok
+test dns::tests::oversized_chunked_dns_response_is_rejected_without_waiting_for_eof ... ok
+test relay::tests::required_relay_never_dials_directly_even_if_mode_is_direct ... ok
+test transport::tests::coalesced_ok_and_tls_bytes_preserve_the_tls_stream ... ok
+test transport::tests::host_config_is_bounded_before_eof_and_accepts_exact_limit ... ok
+test transport::tests::hostile_reply_is_rejected_at_bound_without_waiting_for_eof ... ok
+test transport::tests::parent_ok_requires_exact_acknowledgement_and_newline ... ok
+test wg::readiness_tests::dead_or_stale_handshake_is_not_ready ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src/main.rs (target/debug/deps/tlproxy_host-85594480a3708036)
+
+running 12 tests
+test artifacts::tests::durable_idempotent_never_overwrite_or_delete ... ok
+test artifacts::tests::oversized_frame_rejected_before_body_allocation ... ok
+test artifacts::tests::paginated_index_has_no_truncation_and_full_rescan_finds_new_earlier_hash ... ok
+test artifacts::tests::public_stream_hash_validation_and_index ... ok
+test http_relay::tests::buffering_is_bounded_and_rejected_packets_do_not_advance ... ok
+test http_relay::tests::disconnect_does_not_cancel_committed_inner_write ... ok
+test http_relay::tests::global_session_admission_is_bounded ... ok
+test http_relay::tests::ordering_ack_conflicts_and_expiry_fail_closed ... ok
+test http_relay::tests::output_is_chunked_and_retried_without_loss ... ok
+test http_relay::tests::real_http_roundtrip_buffers_flushes_retries_and_closes ... ok
+test http_relay::tests::retries_preserve_input_and_response_bytes ... ok
+test http_relay::tests::strict_query_and_cache_headers ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+   Doc-tests relay_timelock
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

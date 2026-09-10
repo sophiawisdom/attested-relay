@@ -1,0 +1,11 @@
+✔ carries query and binary response exactly without caching or redirects (16.731708ms)
+✔ rejects wrong paths, methods and hostnames before contacting origin (0.57875ms)
+✔ does not follow or expose unexpected redirects and fails closed on errors (0.864667ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 66.05975

@@ -1,0 +1,30 @@
+active
+Installed release /opt/attested-relay/releases/production-paste-19a53a5; no enclave launched.
+{
+  "EnclaveName": "production-paste-19a53a5",
+  "EnclaveID": "i-0de9795ee9d3ce090-enc1a08abed198619b",
+  "ProcessID": 188400,
+  "EnclaveCID": 16,
+  "NumberOfCPUs": 14,
+  "CPUIDs": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "MemoryMiB": 8192
+}
+
+Successfully terminated enclave i-0de9795ee9d3ce090-enc1a08ab825b578f1.
+Start allocating memory...
+Started enclave with enclave-cid: 16, memory: 8192 MiB, cpu-ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]

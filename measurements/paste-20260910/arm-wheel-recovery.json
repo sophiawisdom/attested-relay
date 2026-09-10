@@ -1,0 +1,6 @@
+{
+  "native_sha256": "ba93c44b594d8a7e3350bb4e6754cff6d0443a02d881545d886e94aa3fb4ab9c",
+  "bundled_binary": true,
+  "fresh_solve_passed": true,
+  "paste_recovery_without_tag_passed": true
+}
