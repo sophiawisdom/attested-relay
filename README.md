@@ -12,27 +12,27 @@ source-to-measurement evidence; it is not proof that the source has no bugs.
 - [Public workflow runs](https://github.com/sophiawisdom/attested-relay/actions/workflows/reproduce-enclave.yml)
 - [Explicit threat model](threatmodel.md)
 - [Pinned application source and expected measurements](build/ci/release.json)
-- [Complete frozen application source](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/attested-relay-19a53a50c3b340a192ef28955789ad083eb7bc69.tar.gz)
+- [Complete frozen application source](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attested-relay-30feebbeea8588fb1d1aa7b5ef40c9903bec0df5.tar.gz)
 
-Application source commit: `19a53a50c3b340a192ef28955789ad083eb7bc69`.
+Application source commit: `30feebbeea8588fb1d1aa7b5ef40c9903bec0df5`.
 The CI repository has its own separate commit identity. The threat model's
 review links refer to files in the application archive; current deployment evidence
 is also recorded in this repository.
 
-Status: **independent reproduction passed** on 2026-09-10. Both GitHub-hosted
+Status: **independent reproduction passed** on 2026-09-11. Both GitHub-hosted
 ARM builds reproduced production's Docker image and PCR0/1/2. A separate job
 remeasured both EIFs and signed the report and actual artifacts. Local verification
 accepted the report and actual EIF with the exact workflow revision pinned.
 
-- [Successful build and signing run](https://github.com/sophiawisdom/attested-relay/actions/runs/34462293819)
-- [Public signed report](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/reproduction.json) and [signature bundle](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/attestation-bundle.json)
-- [Recorded measurements and verification](measurements/paste-20260910/)
-- **CI revision to review and pin:** `6a8dcd564c7a66cf554f7f86520aca528e0a06b6`
+- [Successful build and signing run](https://github.com/sophiawisdom/attested-relay/actions/runs/34584883837)
+- [Public signed report](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/reproduction.json) and [signature bundle](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attestation-bundle.json)
+- [Recorded measurements and verification](measurements/commands-20260911/)
+- **CI revision to review and pin:** `468d8e359fafb098ac5f8503de9a9d96fb559a98`
 
 Download `reproduction.json` and `attestation-bundle.json` into a directory, then:
 
 ```sh
-bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 6a8dcd564c7a66cf554f7f86520aca528e0a06b6
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 468d8e359fafb098ac5f8503de9a9d96fb559a98
 ```
 
 The pin identifies the workflow revision that performed the build, even after
@@ -43,22 +43,30 @@ the resulting PCR0. Build provenance does not establish current relay readiness
 or prove that the source is harmless. Full EIF bytes differ in unmeasured metadata;
 their measured contents match. Both jobs ran at one provider, GitHub.
 
-Production `19a53a5` runs on 14 Graviton5 cores with 84 groups, nice 19 generation
-and one Mullvad device. The new tagged paste API uses the same daily epoch keys.
-Opaque tag IDs are public; the tag password stays private and provides immediate
-read/write access. Public puzzle recovery unlocks contents without the password.
-[Paste design](docs/paste-design.md) and [rollout evidence](measurements/paste-20260910/README.md).
+Production `30feebb` runs on 24 reserved Graviton5 cores of a 32-core parent.
+Its 96 groups require **465,000,000 sequential RandomX hashes** for recovery.
+Generation runs at nice 19. One Mullvad device is reused.
 
-A real short-work Nitro test passed relay traffic, 100 KiB paste write/read,
-tag isolation, pagination and public epoch recovery. The same-size paste passed
-through [relay.sparrowsystems.co](https://relay.sparrowsystems.co), and eight artifacts
-passed anonymous S3 hash verification. PyPI 0.2.0a3 is published and deployed to
-the fleet. The client-only streaming fix is in source `be4c866`; enclave and native
-solver source remains the measured `19a53a5` release. The published wheel hashes
-and both source archives are recorded in the rollout evidence.
+The new [command protocol](protocol.md) supports GET transport carrying upstream
+GET, HEAD, POST, PUT, PATCH, DELETE or OPTIONS, plus password-tagged paste
+write/read commands. Request bodies and individual pastes are capped at 100 KiB.
+Tags remain private; opaque tag IDs are public. Paste recovery uses the same
+public epoch puzzle and does not require knowing the password.
 
-Fresh public Nitro/TLS verification confirms the production pin and Mullvad up,
-while it correctly rejects requests during warm-up. Full-duration generation,
-rollover and recovery remain unverified. The RandomX work is not a guaranteed
-seven-day wall clock. Automatic public key/plaintext publication, S3 Object Lock
-and a third-provider replica remain unfinished.
+Real short-work Nitro tests passed a 100 KiB POST through Mullvad, paste write/read,
+tag isolation, pagination, and exact offline audit recovery on Mac ARM and Linux
+ARM/x86. Public GET transport and anonymously retrieved S3 artifacts passed checks.
+Both PyPI packages are published as **0.2.0a4**.
+
+[Key-production dashboard](https://relay-key-production.sophia-wisdom1999.chatgpt.site)
+(owner access) shows the public aggregate progress feed. These values are host
+telemetry, not signed attestation. Fresh Nitro verification confirms the current
+production image and Mullvad up while it warms; commands are rejected until
+publication of the first puzzle. A new solver follower waits for that puzzle;
+the older published epoch continues solving.
+
+Full-work generation, rollover and new-epoch recovery remain unverified. The
+work factor is not a guaranteed seven-day wall clock. Stored public artifact
+versions have **30-day COMPLIANCE Object Lock**. S3 replication is asynchronous;
+the enclave checks a host persistence acknowledgement. Automatic public
+key/plaintext publication and a third-provider replica remain unfinished.

@@ -1,0 +1,49 @@
+{
+  "at": "2026-09-11T09:40:20.348531+00:00",
+  "launch": {
+    "EnclaveName": "production-commands-30feebb",
+    "EnclaveID": "i-0de9795ee9d3ce090-enc1a08fd6e1afe0f0",
+    "ProcessID": 28524,
+    "EnclaveCID": 16,
+    "NumberOfCPUs": 24,
+    "CPUIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "MemoryMiB": 8192
+  },
+  "build": {
+    "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+    "nitro_cli": "Nitro CLI 1.5.0",
+    "architecture": "aarch64",
+    "eif_sha256": "1a7fb6b3ed347a98f3e063e88b21e72b1ace948eb90245dd2958c5424b76c977"
+  },
+  "measurements": {
+    "HashAlgorithm": "Sha512_48 { .. }",
+    "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+    "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+    "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+  }
+}

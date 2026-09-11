@@ -1,0 +1,6 @@
+{
+  "platform": "macos-arm64",
+  "post_sha256": "329033b7ae3001df7a25bd08b4ea5780c4172e40efb1265a70b2056a03422ae2",
+  "post_bytes": 102400,
+  "fresh_wheel_recovery_passed": true
+}

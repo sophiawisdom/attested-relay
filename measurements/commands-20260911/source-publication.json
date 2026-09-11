@@ -1,0 +1,8 @@
+{
+  "source_commit": "bf0214c9d151fb0b68c1cabaed2ad9f8528c9ce4",
+  "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/bf0214c9d151fb0b68c1cabaed2ad9f8528c9ce4/attested-relay-bf0214c9d151fb0b68c1cabaed2ad9f8528c9ce4.tar.gz",
+  "source_sha256": "d780147d57b636660cda2c218fa27855a2cd39d2222b4bfdca5225a9b811a84f",
+  "files_scanned": 562,
+  "anonymous_hash_verified": true,
+  "build_verified": false
+}

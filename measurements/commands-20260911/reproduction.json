@@ -1,0 +1,87 @@
+{
+  "builds": [
+    {
+      "build_inputs": {
+        "buildkit_image": "moby/buildkit@sha256:28a898719c18a33f4e8000685287fa36fd0dd9560c6440227d3a732d79bb41d8",
+        "docker_image_id": "sha256:4fcd0fffc91eecdcc9ad74c5cb6c9d6ba271ce8a8fda59ca9fc5889f230e67fc",
+        "dockerfile_frontend": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+        "pcrs": {
+          "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+          "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+          "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+        },
+        "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+        "source_sha256": "6b935cb9460c17224e65c26760ec25fe3baf14cb2131b2bca2806cc906a63ea3",
+        "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attested-relay-30feebbeea8588fb1d1aa7b5ef40c9903bec0df5.tar.gz"
+      },
+      "ci_commit": "468d8e359fafb098ac5f8503de9a9d96fb559a98",
+      "copy": 1,
+      "docker_image_id": "sha256:4fcd0fffc91eecdcc9ad74c5cb6c9d6ba271ce8a8fda59ca9fc5889f230e67fc",
+      "eif_sha256": "93a0bf6977b6a67295dd3d19ac387610f679dafb2e2ee401a9472f3637ac9d59",
+      "pcrs": {
+        "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+        "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+        "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+      },
+      "run_attempt": "1",
+      "run_id": "34584883837",
+      "runner_environment": "github-hosted",
+      "schema": "attested-relay-ci-build-v1",
+      "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+      "source_sha256": "6b935cb9460c17224e65c26760ec25fe3baf14cb2131b2bca2806cc906a63ea3"
+    },
+    {
+      "build_inputs": {
+        "buildkit_image": "moby/buildkit@sha256:28a898719c18a33f4e8000685287fa36fd0dd9560c6440227d3a732d79bb41d8",
+        "docker_image_id": "sha256:4fcd0fffc91eecdcc9ad74c5cb6c9d6ba271ce8a8fda59ca9fc5889f230e67fc",
+        "dockerfile_frontend": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+        "pcrs": {
+          "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+          "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+          "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+        },
+        "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+        "source_sha256": "6b935cb9460c17224e65c26760ec25fe3baf14cb2131b2bca2806cc906a63ea3",
+        "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attested-relay-30feebbeea8588fb1d1aa7b5ef40c9903bec0df5.tar.gz"
+      },
+      "ci_commit": "468d8e359fafb098ac5f8503de9a9d96fb559a98",
+      "copy": 2,
+      "docker_image_id": "sha256:4fcd0fffc91eecdcc9ad74c5cb6c9d6ba271ce8a8fda59ca9fc5889f230e67fc",
+      "eif_sha256": "d97e893625e912236876d8cf34431ac38af551d0f07907097a01739f5f8e8f00",
+      "pcrs": {
+        "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+        "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+        "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+      },
+      "run_attempt": "1",
+      "run_id": "34584883837",
+      "runner_environment": "github-hosted",
+      "schema": "attested-relay-ci-build-v1",
+      "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+      "source_sha256": "6b935cb9460c17224e65c26760ec25fe3baf14cb2131b2bca2806cc906a63ea3"
+    }
+  ],
+  "ci_commit": "468d8e359fafb098ac5f8503de9a9d96fb559a98",
+  "ci_repository": "sophiawisdom/attested-relay",
+  "docker_image_reproduced": true,
+  "full_eif_bytes_equal": false,
+  "pcrs_reproduced": true,
+  "release": {
+    "buildkit_image": "moby/buildkit@sha256:28a898719c18a33f4e8000685287fa36fd0dd9560c6440227d3a732d79bb41d8",
+    "docker_image_id": "sha256:4fcd0fffc91eecdcc9ad74c5cb6c9d6ba271ce8a8fda59ca9fc5889f230e67fc",
+    "dockerfile_frontend": "docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",
+    "pcrs": {
+      "PCR0": "23d68ee2a199e9044c9a317fbbff82e480a95641bf589f44feb886243390def2dd5996a1cb78b5da2ba13af447ad419d",
+      "PCR1": "3b4a7e1b5f13c5a1000b3ed32ef8995ee13e9876329f9bc72650b918329ef9cf4e2e4d1e1e37375dab0ba56ba0974d03",
+      "PCR2": "c3d41e45b9fa289461161bc599d31cfa57b07439aa5566fbad0a592654d2cf8fad5ddf2b35527377d1c600b86c03d121"
+    },
+    "source_commit": "30feebbeea8588fb1d1aa7b5ef40c9903bec0df5",
+    "source_sha256": "6b935cb9460c17224e65c26760ec25fe3baf14cb2131b2bca2806cc906a63ea3",
+    "source_url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attested-relay-30feebbeea8588fb1d1aa7b5ef40c9903bec0df5.tar.gz"
+  },
+  "run_attempt": "1",
+  "run_id": "34584883837",
+  "schema": "attested-relay-ci-reproduction-v1",
+  "scope": "Two GitHub-hosted executions; same provider. PCRs and Docker image must match production. EIF metadata can differ.",
+  "workflow_ref": "sophiawisdom/attested-relay/.github/workflows/reproduce-enclave.yml@refs/heads/main"
+}

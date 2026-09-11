@@ -1,0 +1,16 @@
+[
+  {
+    "artifact": "4ebdb41a6ca9d27c8651b18a51891c3c1f5792a8bd2164d3ec37c3f7bfd090d9.record.json",
+    "anonymous_hash_verified": true,
+    "version_id": "A_vPHLpFrXS5QdmqPDKWCFIhs0L3XRMr",
+    "mode": "COMPLIANCE",
+    "retain_until": "2026-10-11T09:39:53.302000+00:00"
+  },
+  {
+    "artifact": "a4edad6f9a633066b6a60efde5931972a74df3464123105cfe5dd1742f0e2897.paste.json",
+    "anonymous_hash_verified": true,
+    "version_id": "Xf7Kz4lbHbVsHwYqAyf1mZIVaCKghbSI",
+    "mode": "COMPLIANCE",
+    "retain_until": "2026-10-11T09:39:58.630000+00:00"
+  }
+]

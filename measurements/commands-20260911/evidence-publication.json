@@ -1,0 +1,20 @@
+[
+  {
+    "name": "reproduction.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/reproduction.json",
+    "sha256": "08623bdc5b1b426ee3b42b302a6a95580c817c318c199953b5ea6e47bad5e1f8",
+    "anonymous_download_verified": true
+  },
+  {
+    "name": "attestation-bundle.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attestation-bundle.json",
+    "sha256": "509003134f6a10b7dee0d276accf04d40f5e5931e93ee8da68d74f5daea529b5",
+    "anonymous_download_verified": true
+  },
+  {
+    "name": "production-verification.json",
+    "url": "https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/production-verification.json",
+    "sha256": "9346f813e3273018383d321099c799ee43fa47dd5a915900c974ec5d4d16747e",
+    "anonymous_download_verified": true
+  }
+]

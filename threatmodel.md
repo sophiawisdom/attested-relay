@@ -1,20 +1,22 @@
 # Attested relay v2 threat model
 
-Status: deployment update, 2026-09-10. This document describes the
-intended security properties, the deployed design, and its known gaps. It is
-not a claim that all properties have been proved or that the service is ready.
+Status: deployment update, 2026-09-11. This document describes the
+intended security properties, deployed design, and known gaps; it is not a
+claim that all properties have been proved.
 
-Measured production source: `2737c4559d616e543be706ec576630d21eae9007`.
-It is running non-debug on 14 Graviton5 cores with Mullvad up and epoch warming.
-84 serial groups preserve the previous total recovery work, while a bounded
-worker pool improves generation utilization. See [current rollout evidence](measurements/graviton-fast-rollout-20260910/README.md).
-See [Mullvad production evidence](measurements/graviton5-mullvad-92bd475-20260910/),
-[requirement audit](reviews/current/REQUIREMENTS-AUDIT.md), and
-[Astra review](reviews/current/astra-security-review.md).
+Measured production source: `30feebbeea8588fb1d1aa7b5ef40c9903bec0df5`.
+It is running non-debug on 24 reserved Graviton5 cores of a 32-core c9g.8xlarge,
+with Mullvad up and the first epoch warming. Its 96 serially wrapped groups
+require exactly 465,000,000 hashes for recovery. Commands support upstream
+methods and password-tagged pastes over the existing GET transport.
+[Current rollout and test evidence](measurements/commands-20260911/README.md),
+[protocol](protocol.md), [requirement audit](reviews/current/REQUIREMENTS-AUDIT.md),
+and [earlier Astra review](reviews/current/astra-security-review.md).
+Earlier reviews predate the new command and progress code.
 
 ## 1. Security objective
 
-An independently verifying client should be able to send an HTTPS GET through
+An independently verifying client should be able to send an HTTPS request through
 the relay without giving the EC2 account owner, parent operating system, or
 relay front end the request URL, request plaintext, response plaintext, or
 enclave secrets. The intended upstream necessarily receives its request and
@@ -55,7 +57,8 @@ bugs or that a compromised compiler cannot produce malicious code.
 
 ## 3. Assets
 
-- Request URLs, query parameters, response bodies, and captured audit plaintext.
+- Request URLs, query parameters, methods, headers, bodies, response bodies,
+  paste contents and tag passwords, and captured audit plaintext.
 - Enclave TLS and service-signing private keys.
 - Active/future epoch keys and unreleased puzzle seeds or intermediate results
   that could bypass the intended serial work.
@@ -150,8 +153,7 @@ of durable storage or replication**.
 
 A host can also kill the enclave after an upstream has observed a request but
 before capture finishes. Consequently, this is not an unconditional guarantee
-that every upstream interaction survives in the archive. A GET-only interface
-does not guarantee that every target treats GET as free of side effects.
+that every upstream interaction survives in the archive. Both method commands and legacy GET requests can cause destination-side effects.
 
 ### Archived evidence and recovered records
 
@@ -196,54 +198,52 @@ AEAD nor a signed puzzle proves archive completeness.
 
 ## 7. Known gaps and deployment status
 
-- Production `2737c45` includes the native hardening changes documented in
+- Production `30feebb` includes the native hardening changes documented in
   [RandomX patch notes](vendor/randomx/PATCHED.md): a per-call AES probe, explicit
   native VM/JIT/temporary-state erasure, and fail-closed page-permission checks.
   [Regression evidence](reviews/current/native-fixes-20260910.md) covers ARM
   sanitizer checks and Linux deallocation/failure-injection tests. The previously
   reproduced shared AES-probe race is fixed in this deployed source. These checks
   do not prove erasure of every compiler, register or kernel copy.
-- Production `2737c45` is running non-debug on Graviton5 with an authenticated
+- Production `30feebb` is running non-debug on Graviton5 with an authenticated
   signed policy reporting Mullvad up and epoch warming. An eight-iteration Nitro
   build differing only in work count passed fresh attestation, a real Mullvad-exit
   request and exact offline audit-record recovery. Real VPN loss/recovery and
   absence of direct fallback were exercised separately in development mode.
   Full-duration production generation, rollover and key recovery remain unverified.
-- Two independent GitHub-hosted ARM builds reproduced the deployed `2737c45` Docker
+- Two independent GitHub-hosted ARM builds reproduced the deployed `30feebb` Docker
   image and PCR0/1/2. A separate hosted job recomputed the EIF measurements and
   signed the results. [Evidence and verification](build/ci/README.md) require
   accepting an exact reviewed CI revision, trusting GitHub's execution/provenance,
   and subsequently verifying a fresh AWS Nitro/TLS binding. This adds independent
   source-to-measurement evidence; it does not prove source safety or live readiness.
-  [Run 34458531605](https://github.com/sophiawisdom/attested-relay/actions/runs/34458531605)
+  [Run 34584883837](https://github.com/sophiawisdom/attested-relay/actions/runs/34584883837)
   passed; its signed report and an actual EIF verified locally against CI revision
-  `321b09e7bef53442d567892ab91ec4feb8cfcc3d`. Full EIF bytes differ in unmeasured
+  `468d8e359fafb098ac5f8503de9a9d96fb559a98`. Full EIF bytes differ in unmeasured
   metadata; Docker image identity and PCR0/1/2 match.
-- The previous seven-worker configuration projected about 25.14 hours. The current
-  design schedules 84 groups over 14 workers at nice 19, preserving total work.
-  Full-duration generation throughput remains unmeasured; if generation misses
-  the 24-hour serving epoch, requests expire closed until the successor is ready.
-- AWS and Hetzner artifact copies and the nine-worker solver fleet are operating.
-  A third provider remains pending. Public Cloudflare transport at
-  `relay.sparrowsystems.co` now runs through a Worker custom domain and a VPC
-  binding to the existing tunnel. Public retry/cache tests and fresh Nitro/TLS
-  verification passed while warming, using the SDK source user-agent fix (not
-  yet in the published wheel). Cloudflare/Worker remains an untrusted ciphertext
-  transport. The 84-group rollout separately changed the measured image and pin.
-  [Public deployment evidence](measurements/cloudflare-sparrow-20260910/README.md).
-- On 2026-09-10 the archive's `artifacts/` prefix was made publicly readable
-  and discoverable over HTTPS. Ten existing objects plus a fresh scoped-service
-  diagnostic upload passed anonymous full-byte hash checks. The latest 84-group
-  diagnostic also passed anonymous checks for all four request artifacts. The current production
-  origin still has no published artifacts. [Live launch review](measurements/launch-review-20260910/README.md).
+- Generation schedules 96 groups over 24 workers at nice 19. Full-duration
+  throughput remains unmeasured; if generation misses the 24-hour serving epoch,
+  requests expire closed until the successor is ready.
+- AWS and Hetzner artifact copies are operating. The old puzzle continues solving;
+  a separate eight-worker follower waits for new production puzzles. A third
+  provider remains pending. Cloudflare's Worker transports ciphertext through its
+  VPC binding; the published 0.2.0a4 SDK includes the transport fixes.
+- The archive's `artifacts/` prefix is publicly readable and discoverable over
+  HTTPS. The current diagnostic POST and paste artifacts passed anonymous
+  full-byte hash checks and retained-version checks. Full-work production has
+  not yet published its first puzzle. [Current evidence](measurements/commands-20260911/README.md).
 - The solver fleet saves recovered keys locally. Automatic public publication of
   recovered keys/decrypted records is not deployed; public users can independently
   solve downloaded puzzles. Automatic discovery/failover from S3 is also not wired
   into the fleet's current origin-based follower.
-- The S3 uploader lacks delete permissions, but Object Lock is not enabled.
-  Enclave-authenticated S3 storage/retention verification is not implemented.
-  The user has not selected a retention duration. Do not describe current
-  uploads as undeletable or independently storage-confirmed before response.
+- The S3 archive uses 30-day Object Lock compliance retention by default, and
+  existing public artifact versions are protected for 30 days from backfill.
+  The uploader also lacks delete permissions. Protection applies to retained
+  versions until their retention dates; administrators can still change future
+  defaults or public access, and new versions/delete markers can hide retained
+  versions from ordinary reads. Enclave-authenticated S3 storage/retention
+  verification is not implemented: uploads are not independently
+  storage-confirmed before response. See [Object Lock evidence](measurements/s3-object-lock-20260910/README.md).
 - Per-record origin signatures or an equivalent durable independent receipt
   mechanism are not implemented. Post-release provenance has the limit above.
 
@@ -289,3 +289,17 @@ replicas, metadata leakage and imperfect memory erasure still apply.
 The short-work Nitro paste test, public Cloudflare 100 KiB round trip and
 independent epoch-key recovery passed. Full-duration production behavior remains
 unverified. [Paste rollout evidence](measurements/paste-20260910/README.md).
+
+## Public generation telemetry
+
+`GET /v1/key-production` exposes only aggregate generation counters: phase,
+generation number, completed/total hashes and groups, worker count, elapsed
+time, service readiness and Mullvad status. It includes no seeds, intermediate
+chain values, epoch keys, tags or application request data. The host can forge
+or withhold this telemetry; it must never authorize a client request or replace
+fresh Nitro/TLS verification. The dashboard labels this distinction explicitly.
+
+The command API has bounded bodies and headers and forbids routing/framing
+header overrides. It performs no application retry or redirect following for
+`send_request`; a missing reply does not prove that a destination operation had
+no effect. The legacy GET route retains its bounded redirect behavior.

@@ -1,22 +1,22 @@
 # Public reproduction evidence
 
-Production source `19a53a50c3b340a192ef28955789ad083eb7bc69` includes required
-Mullvad egress, native hardening, the optimized ARM JIT, 84-group generation and tagged paste storage. Two fresh GitHub-hosted ARM builds reproduced
+Production source `30feebbeea8588fb1d1aa7b5ef40c9903bec0df5` includes required
+Mullvad egress, native hardening, the optimized ARM JIT, 96-group generation, method commands, tagged paste storage and aggregate progress. Two fresh GitHub-hosted ARM builds reproduced
 its deployed Docker image and PCR0/1/2. A separate job recomputed the EIF
 measurements and signed both EIFs and the comparison report.
 
-[Run 34462293819](https://github.com/sophiawisdom/attested-relay/actions/runs/34462293819)
-passed on 2026-09-10. The downloaded report and an actual EIF passed local Sigstore
+[Run 34584883837](https://github.com/sophiawisdom/attested-relay/actions/runs/34584883837)
+passed on 2026-09-11. The downloaded report and an actual EIF passed local Sigstore
 verification with the exact workflow/source revision and hosted-runner restriction.
 
-**CI revision to review and pin:** `6a8dcd564c7a66cf554f7f86520aca528e0a06b6`.
-[Public report](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/reproduction.json) and [portable signature bundle](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/19a53a50c3b340a192ef28955789ad083eb7bc69/attestation-bundle.json)
+**CI revision to review and pin:** `468d8e359fafb098ac5f8503de9a9d96fb559a98`.
+[Public report](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/reproduction.json) and [portable signature bundle](https://attested-relay-releases-370686332139-us-west-2.s3.us-west-2.amazonaws.com/releases/30feebbeea8588fb1d1aa7b5ef40c9903bec0df5/attestation-bundle.json)
 are available anonymously from S3. The actual EIFs are retained in the Actions
 artifacts for 90 days.
 Download the report and bundle into one directory, then run:
 
 ```sh
-bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 6a8dcd564c7a66cf554f7f86520aca528e0a06b6
+bash build/ci/verify.sh ./verified-reproduction sophiawisdom/attested-relay 468d8e359fafb098ac5f8503de9a9d96fb559a98
 ```
 
 This pin remains the verification revision after later documentation changes.
