@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-09-11T09:51:14.722548+00:00",
+  "response": {
+    "age_seconds": 4,
+    "production": {
+      "completed_groups": 0,
+      "completed_hashes": 4320000,
+      "elapsed_seconds": 650,
+      "generation": 1,
+      "groups": 96,
+      "mullvad_up": true,
+      "phase": "hashing",
+      "service_ready": false,
+      "total_hashes": 465000000,
+      "version": 1,
+      "workers": 24
+    },
+    "source": "parent_telemetry",
+    "stale": false
+  },
+  "interval_seconds": 170,
+  "interval_hashes_per_second": 7058.823529411765
+}

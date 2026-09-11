@@ -85,6 +85,18 @@ new puzzles every 30 seconds, with up to eight workers at nice 19. It has a
 separate state directory from the old follower; old recovery continues. The new
 full-work puzzle has not been published, so its solve cannot start yet.
 
+A separate [production acceptance checker](../../deploy/check-command-production.py)
+is actively waiting for fresh verified readiness. It will send disposable
+100 KiB POST/paste commands once, verify public S3 copies and the signed puzzle,
+and require a live solver process with a written checkpoint (or a recovered key
+matching its commitment). It never restarts generation or solvers and does not
+retry application commands. [Observed checker state](acceptance-checker.json).
+
+At 09:51 UTC, generation had completed 4.32M hashes. The latest 170-second
+interval measured about 7,059 aggregate hashes/second, projecting about 18 hours
+remaining if sustained. This is an early generation observation, not a solo
+solver benchmark. [Follow-up progress observation](progress-followup.json).
+
 ## Remaining verification
 
 Full-work generation completion, activation, daily rollover, and full-work

@@ -1,0 +1,11 @@
+{
+  "unit": "attested-relay-production-acceptance.service",
+  "host": "Hetzner solver host",
+  "main_pid": 2361333,
+  "observed_state": "active/running",
+  "phase": "waiting for fresh verified readiness",
+  "script": "deploy/check-command-production.py",
+  "output": "/root/relay-commands-20260911/production-acceptance",
+  "retries_application_commands": false,
+  "restarts_services": false
+}
